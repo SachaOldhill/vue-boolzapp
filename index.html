@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Bolzzapp</title>
+
+    <!-- Font Awsome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+    <!-- JQuery -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- VueJS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="master.css">
+
+    <!-- JS -->
+
+    <script src="script.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+   <div id="app">
+     <div class="container">
+       <ul>
+         <li v-for="(contact, index) in contacts">
+
+           {{contact.name}}
+           <div class="avatar">
+             <img :src="contact.avatar" alt="">
+           </div>
+
+           <!-- <div class="avatar">
+              <img src="img/tram.png" alt="">
+           </div> -->
+         </li>
+       </ul>
+     </div>
+   </div>
+  </body>
+</html>

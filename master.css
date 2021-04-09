@@ -1,0 +1,28 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+}
+.container{
+  background-color: rgb(230, 195, 24);
+  font-weight: bold;
+  color: black;
+  display: flex;
+  justify-content: flex-start;
+  min-height: 100vh;
+  font-size: 18px;
+}
+.name{
+  padding: 20px;
+}
+.avatar img{
+  /* padding: 20px; */
+  height: 90px;
+  width: 90px;
+}
+.message{
+  font-size: 20px;
+  padding: 10px;
+}
