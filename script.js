@@ -100,6 +100,7 @@ function initVue() {
     methods: {
      inside: function(contact){
        contact.name = contact.messages;
+       //contact.name ? contact.messages : contact.name;
      }
     },
   });
