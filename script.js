@@ -1,3 +1,17 @@
+// Milestone 1
+//● Replica della graficacon la possibilità
+// di averemessaggi scritti dall’utente (verdi) e dall'
+// interlocutore (bianco) assegnando due classiCSS diverse
+//● Visualizzazione dinamica della lista contatti:
+// tramitela direttiva v-for, visualizzarenome e immagine
+// di ogni contatto
+// Milestone 2
+//● Visualizzazione dinamica dei messaggi:tramite la direttiva
+// v-for, visualizzare tutti i messaggi relativi al contatto
+// attivo all’interno del pannello della conversazione
+//● Click contatto mostrala conversazione del contatto cliccato
+
+
 function initVue() {
   new Vue({
     el: "#app",
@@ -84,7 +98,9 @@ function initVue() {
      ],
     },
     methods: {
-
+     inside: function(contact){
+       contact.name = contact.messages;
+     }
     },
   });
 }

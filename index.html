@@ -29,8 +29,8 @@
    <div id="app">
      <div class="container">
        <ul>
-         <li v-for="(contact, index) in contacts">
-
+         <li id="thisLi" @click='inside(contact)' v-for="(contact, index) in contacts">
+           <!-- {{contact.messages}} -->
            {{contact.name}}
            <div class="avatar">
              <img :src="contact.avatar" alt="">
