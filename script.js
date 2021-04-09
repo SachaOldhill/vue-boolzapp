@@ -96,11 +96,12 @@ function initVue() {
           ],
         },
      ],
+     "activeContact":0,
     },
     methods: {
-     inside: function(contact){
-       contact.name = contact.messages;
-       //contact.name ? contact.messages : contact.name;
+     inside: function(index){
+       console.log(index);
+       this.activeContact=index;
      }
     },
   });

@@ -29,7 +29,7 @@
    <div id="app">
      <div class="container">
        <ul>
-         <li id="thisLi" @click='inside(contact)' v-for="(contact, index) in contacts">
+         <li id="thisLi" @click='inside(index)' v-for="(contact, index) in contacts">
            <!-- {{contact.messages}} -->
            {{contact.name}}
            <div class="avatar">
@@ -41,6 +41,12 @@
            </div> -->
          </li>
        </ul>
+       <div class="">
+         <span>{{contacts[activeContact].name}}</span>
+         <div class="avatar">
+           <img :src="contacts[activeContact].avatar" alt="">
+         </div>
+       </div>
      </div>
    </div>
   </body>
