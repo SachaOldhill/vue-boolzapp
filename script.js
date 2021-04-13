@@ -1,5 +1,5 @@
 // Milestone 1
-//● Replica della graficacon la possibilità
+//● Replica della grafica con la possibilità
 // di averemessaggi scritti dall’utente (verdi) e dall'
 // interlocutore (bianco) assegnando due classiCSS diverse
 //● Visualizzazione dinamica della lista contatti:
@@ -95,15 +95,52 @@ function initVue() {
             }
           ],
         },
-     ],
-     "activeContact":0,
+      ],
+      "activeContact": 0,
     },
     methods: {
-     inside: function(index){
-       console.log(index);
-       this.activeContact=index;
-     }
-    },
+      contactClick: function(index) {
+        this.activeIndex = index;
+      },
+      sendMessage: function() {
+        const newMsg = this.getNewMessage(this.textMessage, 'sent');
+        this.contacts[this.activeIndex].messages.push(newMsg);
+        this.textMessage = '';
+        this.sendAutoReply();
+      },
+      sendAutoReply: function() {
+        const toReplyIndex = this.activeIndex;
+        setTimeout(() => {
+          const newMsg = this.getNewMessage('Ok', 'received');
+          this.contacts[toReplyIndex].messages.push(newMsg);
+        }, 1000);
+      },
+      getNewMessage: function(text, status) {
+        const now = new Date();
+        const nowStr = now.getDate() + '/' +
+          now.getMonth() + '/' +
+          now.getFullYear() + ' ' +
+          now.getHours() + ':' +
+          now.getMinutes();
+        return {
+          date: nowStr,
+          text: text,
+          status: status
+        };
+      },
+      searchContact: function() {
+        const resContacts = [];
+        for (let i = 0; i < this.contacts.length; i++) {
+          const contact = this.contacts[i];
+          const name = contact['name'];
+          if (name.toLowerCase()
+            .includes(this.searchText.toLowerCase())) {
+            resContacts.push(contact);
+          }
+        }
+        return resContacts;
+      }
+    }
   });
 }
 

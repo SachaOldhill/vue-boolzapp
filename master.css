@@ -5,6 +5,9 @@
   list-style-type: none;
   text-decoration: none;
 }
+.display-block{
+  display: block;
+}
 .container{
   background-color: rgb(230, 195, 24);
   font-weight: bold;
@@ -14,10 +17,27 @@
   min-height: 100vh;
   font-size: 18px;
 }
+.contacts{
+ display: flex;
+ flex-wrap: wrap;
+ flex-direction: column;
+ min-width: 300px;
+ background-color: rgb(20, 213, 211);
+}
+.contact-list{
+  padding: 10px 0px;
+}
+.contact-name{
+  font-size: 30px;
+  align-self: center;
+}
+.contact-container{
+  display: flex;
+}
 .name{
   padding: 20px;
 }
-.avatar img{
+.avatar{
   /* padding: 20px; */
   height: 90px;
   width: 90px;
