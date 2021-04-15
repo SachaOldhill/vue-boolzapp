@@ -39,37 +39,26 @@
         <div class="header-left">
           <div class="header-left-logo">
             <img src="img/tram.png" alt="">
-            <span>Guybrush Threepwood</span>
-          </div>
-          <div class="header-left-icons">
-            <i class="fas fa-circle-notch"></i>
-            <i class="fas fa-comment-alt"></i>
-            <i class="fas fa-ellipsis-v"></i>
+            <span>Furgoncino</span>
           </div>
         </div>
         <div class="left-disclaimer">
-          <div class="left-disclaimer-logo">
-            <i class="fa fa-bell-slash" aria-hidden="true"></i>
-          </div>
           <div class="left-disclaimer-text">
             <h3>Ricevi notifiche di nuovi messaggi</h3>
             <a href="#">Attiva notifiche desktop</a>
           </div>
         </div>
         <div class="left-searchbar">
-          <label for="search" class="search-label">
-            <i class="fa fa-search"></i>
-          </label>
-          <input v-model="searchText" type="text" class="left-searchbar-input" placeholder="Cerca o inizia una nuova chat">
+          <input v-model="searchText" type="text" name="" value="" placeholder="Cerca il contatto">
         </div>
         <div class="contacts">
-          <div v-for="(contact, index) in searchContact()" @click="contactClick(index)" class="contact" :class="index == activeIndex ? 'active' : ''">
+          <div v-for="(contact, index) in filteredContacts" @click="contactClick(contact)" class="contact" :class="index == activeIndex ? 'active' : ''">
             <div class="contact-logo">
-              <img :src="'img/' + contact.avatar + '.png'" alt="">
+              <img :src="contact.avatar" alt="">
             </div>
             <div class="contact-info">
               <h3>
-                <span class="contact-name">{{ contact.name }}</span>
+                <span>{{contact.name}}</span>
               </h3>
             </div>
           </div>
@@ -78,32 +67,20 @@
       <div class="right">
         <div class="header-right">
           <div class="header-right-logo">
-            <img :src="'img/' + searchContact()[activeIndex].avatar + '.png'">
-            <h3>{{ searchContact()[activeIndex].name }}</h3>
-          </div>
-          <div class="header-right-icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-paperclip"></i>
-            <i class="fas fa-ellipsis-v"></i>
+            <img :src="contacts[activeIndex].avatar" alt="">
+            <h3> {{contacts[activeIndex].name}} </h3>
           </div>
         </div>
         <div class="right-messages-container">
           <div id="right-messages" class="right-messages">
-            <div v-for="message in searchContact()[activeIndex].messages" class="message" :class="message.status">
+            <div v-for="message in contacts[activeIndex].messages" class="message" :class="message.status">
               <span class="message-text">{{ message.text }}</span>
               <span class="message-time">{{ message.date }}</span>
-              <i class="fa fa-chevron-down f-right message-option text-success"></i>
             </div>
           </div>
         </div>
         <div class="right-footer">
-          <div class="right-footer-icon f-left">
-            <i class="fas fa-smile"></i>
-          </div>
           <input @keyup.enter="sendMessage" v-model="textMessage" type="text" class="new-message-inputs" placeholder="Scrivi un messaggio">
-          <div class="right-footer-icon f-right">
-            <i class="fa fa-microphone" aria-hidden="true"></i>
-          </div>
         </div>
       </div>
     </div>

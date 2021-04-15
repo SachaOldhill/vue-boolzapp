@@ -96,50 +96,91 @@ function initVue() {
           ],
         },
       ],
-      "activeContact": 0,
+      'searchText': '',
+      "activeIndex": 0,
+      'textMessage':'',
+    },
+    updated() {
+      var container = this.$el.querySelector('#right-messages');
+      container.scrollTop = container.scrollHeight;
+    },
+    computed: {
+      filteredContacts: function(){
+        // const result = words.filter(word => word.length > 6)
+        return this.contacts.filter(contact =>{
+          const result = contact.name.toLowerCase().includes(this.searchText.toLowerCase());
+          return result;
+        } );
+      }
     },
     methods: {
-      contactClick: function(index) {
-        this.activeIndex = index;
+        contactClick: function(contact) {
+        this.activeIndex = this.contacts.indexOf(contact);
       },
-      sendMessage: function() {
-        const newMsg = this.getNewMessage(this.textMessage, 'sent');
-        this.contacts[this.activeIndex].messages.push(newMsg);
-        this.textMessage = '';
-        this.sendAutoReply();
-      },
-      sendAutoReply: function() {
-        const toReplyIndex = this.activeIndex;
-        setTimeout(() => {
-          const newMsg = this.getNewMessage('Ok', 'received');
-          this.contacts[toReplyIndex].messages.push(newMsg);
-        }, 1000);
-      },
-      getNewMessage: function(text, status) {
-        const now = new Date();
-        const nowStr = now.getDate() + '/' +
-          now.getMonth() + '/' +
-          now.getFullYear() + ' ' +
-          now.getHours() + ':' +
-          now.getMinutes();
-        return {
-          date: nowStr,
-          text: text,
-          status: status
-        };
-      },
-      searchContact: function() {
-        const resContacts = [];
-        for (let i = 0; i < this.contacts.length; i++) {
-          const contact = this.contacts[i];
-          const name = contact['name'];
-          if (name.toLowerCase()
-            .includes(this.searchText.toLowerCase())) {
-            resContacts.push(contact);
-          }
-        }
-        return resContacts;
-      }
+        sendMessage: function(){
+         // console.log(this.textMessage);
+         if (this.textMessage.length>0) {
+           const newMsg = this.getNewMessage(this.textMessage, "sent");
+           this.contacts[this.activeIndex].messages.push(newMsg);
+           this.textMessage = '';
+           setTimeout(this.sendAutoReply,1000);
+         }
+        },
+        sendAutoReply: function(){
+          const newMsg = this.getNewMessage("ok", "received");
+          this.contacts[this.activeIndex].messages.push(newMsg);
+        },
+        getNewMessage: function(text, status){
+          const newMsg = {
+            date: "1/1/1",
+            text: text,
+            status: status
+          };
+          return newMsg;
+
+        },
+
+
+
+
+      // sendMessage: function() {
+      //   const newMsg = this.getNewMessage(this.textMessage, 'sent');
+      //   this.contacts[this.activeIndex].messages.push(newMsg);
+      //   this.textMessage = "";
+      //   this.sendAutoReply();
+      // },
+      // sendAutoReply: function() {
+      //   const indexReply = this.activeIndex;
+      //   setTimeout(() => {
+      //     const autoMsg = this.getNewMessage('Auto answer', 'received');
+      //     this.contacts[indexReply].messages.push(autoMsg);
+      //   }, 2000);
+      // },
+      // getNewMessage: function(text, status) {
+      //   // const now = new Date();
+      //   // const nowStr = now.getDate() + '/' +
+      //   //   now.getMonth() + '/' +
+      //   //   now.getFullYear() + ' ' +
+      //   //   now.getHours() + ':' +
+      //   //   now.getMinutes();
+      //   return {
+      //     // date: nowStr,
+      //     text: text,
+      //     status: status
+      //   };
+      // },
+      // contactList: function() {
+      //   const contactsArr = [];
+      //   for (let i = 0; i < this.contacts.length; i++) {
+      //     const contact = this.contacts[i];
+      //     const name = contact['name'];
+      //     if (name.toLowerCase()
+      //       .includes(this.searchText.toLowerCase())) {
+      //       contactsArr.push(contact);
+      //     }
+      //   }
+      //   return contactsArr;
+      // }
     }
   });
 }
